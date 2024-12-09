@@ -71,7 +71,7 @@ const PongGame: React.FC = () => {
 
     setRightPaddle(prev => ({
       ...prev,
-      y: Math.max(40, Math.min(560, prev.y + (keysPressed.current.has('ArrowUp') ? -PADDLE_SPEED : keysPressed.current.has('ArrowDown') ? PADDLE_SPEED : 0))),
+      y: Math.max(40, Math.min(560, prev.y + (keysPressed.current.has('arrowup') ? -PADDLE_SPEED : keysPressed.current.has('arrowdown') ? PADDLE_SPEED : 0))),
     }));
 
     // Update ball position
