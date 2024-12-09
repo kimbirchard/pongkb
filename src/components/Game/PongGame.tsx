@@ -116,6 +116,18 @@ const PongGame: React.FC = () => {
     };
   }, [gameStarted]);
 
+  // Add back the game loop initialization when game starts
+  useEffect(() => {
+    if (gameStarted) {
+      gameLoopRef.current = requestAnimationFrame(gameLoop);
+      return () => {
+        if (gameLoopRef.current) {
+          cancelAnimationFrame(gameLoopRef.current);
+        }
+      };
+    }
+  }, [gameStarted]);
+
   return (
     <div className="relative w-[800px] h-[600px] bg-black border-2 border-white mx-auto overflow-hidden">
       {!gameStarted && (
