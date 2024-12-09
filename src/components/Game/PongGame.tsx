@@ -27,12 +27,6 @@ const PongGame: React.FC = () => {
       y: INITIAL_BALL_SPEED * (Math.random() * 2 - 1),
     };
     setBallVelocity(newVelocity);
-    
-    // Cancel the current game loop and start a new one
-    if (gameLoopRef.current) {
-      cancelAnimationFrame(gameLoopRef.current);
-    }
-    gameLoopRef.current = requestAnimationFrame(gameLoop);
   };
 
   const handleCollisions = () => {
@@ -88,7 +82,10 @@ const PongGame: React.FC = () => {
     }));
 
     handleCollisions();
-    gameLoopRef.current = requestAnimationFrame(gameLoop);
+    
+    if (gameStarted) {
+      gameLoopRef.current = requestAnimationFrame(gameLoop);
+    }
   };
 
   useEffect(() => {
@@ -116,7 +113,6 @@ const PongGame: React.FC = () => {
     };
   }, [gameStarted]);
 
-  // Add back the game loop initialization when game starts
   useEffect(() => {
     if (gameStarted) {
       gameLoopRef.current = requestAnimationFrame(gameLoop);
